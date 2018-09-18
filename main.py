@@ -8,16 +8,11 @@ import random
 
 def display_board(board):
 
-    if len(board) == 10:
-        print("\n " + board[7] + "  |  " + board[8] + "  |  " + board[9] + " ")
-        print("-" * 15)
-        print(" " + board[4] + "  |  " + board[5] + "  |  " + board[6] + " ")
-        print("-" * 15)
-        print(" " + board[1] + "  |  " + board[2] + "  |  " + board[3] + " ")
-    else:
-        print("\nERROR: Please input appropriate board parameters.")
-
-
+    print("\n " + board[7] + "  |  " + board[8] + "  |  " + board[9] + " ")
+    print("-" * 15)
+    print(" " + board[4] + "  |  " + board[5] + "  |  " + board[6] + " ")
+    print("-" * 15)
+    print(" " + board[1] + "  |  " + board[2] + "  |  " + board[3] + " ")
 
 def player_input():
 
@@ -38,8 +33,6 @@ def player_input():
 
     return player1
 
-
-
 def place_marker(board, marker, position):
 
     position = int(input('Please enter a number: '))
@@ -49,56 +42,61 @@ def place_marker(board, marker, position):
     else:
         board[position] = marker
 
-
-
 def win_check(board, mark):
+
+    gameover = False
+
     if board[5] == mark:
 
         # Middle Row
         if board[4] == mark and board[6] == mark:
             print("\nGame over!")
+            gameover = True
 
         # Middle Column
         elif board[8] == mark and board[2] == mark:
             print("\nGame over!")
+            gameover = True
 
         # Bottom Left to Top Right
         elif board[1] == mark and board[9] == mark:
             print("\nGame over!")
+            gameover = True
 
         # Bottom Right to Top Left
         elif board[3] == mark and board[7]:
             print("\nGame over!")
+            gameover = True
 
     # Top Row
     elif board[7] == mark and board [8] == mark and board[9] == mark:
         print("\nGame over!")
+        gameover = True
 
     # Borrom Row
     elif board[1] == mark and board[2] == mark and board[3] == mark:
         print("\nGame over!")
+        gameover = True
 
     # Left Column
     elif board[1] == mark and board[4] == mark and board[7] == mark:
         print("\nGame over!")
+        gameover = True
 
     # Right Column
     elif board[3] == mark and board[6] == mark and board[9] == mark:
         print("\nGame over!")
+        gameover = True
     else:
         print("\nLet's keep playing!")
 
-
+    return gameover
 
 def choose_first():
     return (random.randrange(1,2))%2 == 0
 
-
-
 def space_check(board, position):
     return board[position] == ' '
-
-
 
 def full_board_check(board):
     for i in board:
@@ -106,8 +104,6 @@ def full_board_check(board):
             return True
         else:
             return False
-
-
 
 def player_choice(board):
 
@@ -117,20 +113,18 @@ def player_choice(board):
 
         next_position = input("\nWhat's your next choice?: ")
 
-        if position < 1 or position > 9:
+        if next_position < 1 or next_position > 9:
             print("\nERROR: Please position in 1-9. ")
         else:
             return space_check(board, next_position)
 
-
-
-def reply():
+def replay():
 
     new_game = None
 
     x = None
 
-    while x != True
+    while x != True:
 
         resp = input("\nDo you want to play again? [Y/N] : ")
 
@@ -146,28 +140,70 @@ def reply():
     return new_game
 
 
-
-
-
-board = ['#',' ',' ',' ',' ',' ',' ',' ',' ',' ',]
-
 # Main Program starts here.
+
 print('\nWelcome to Tic Tac Toe!')
+board = ['#',' ',' ',' ',' ',' ',' ',' ',' ',' ',]
+player1 = player_input()
+player2 = ''
+
+if player1.upper() == "X":
+    player2 = 'O'
+else:
+    player2 = 'X'
+
 
 while True:
 
     # Set the game up here
-    pass
+    player1_turn = None
+
+    if choose_first() == True:
+        player1_turn = True
+    else:
+        player1_turn = False
 
     while game_on:
 
-        # Player 1 Turn
+        display_board(board)
 
+        # Player 1 Turn
+        if player1_turn == True:
+            mark = player_input()
+            position = int(input('Please enter a number: '))
+
+            if position < 1 or position > 9:
+                print("\nERROR: Please position in 1-9. ")
+            elif space_check(board, position) == False:
+                print("\nERROR: That space isn't free. ")
+            else:
+                place_marker(board, mark, position)
+                display_board(board)
+                if win_check(board, mark) == True:
+                    game_on = False
+                else:
+                    player1_turn = False
 
         # Player2's turn.
+        else:
+            mark = player_input()
+            position = int(input('Please enter a number: '))
 
-            pass
+            if position < 1 or position > 9:
+                print("\nERROR: Please position in 1-9. ")
+            elif space_check(board, position) == False:
+                print("\nERROR: That space isn't free. ")
+            else:
+                place_marker(board, mark, position)
+                display_board(board)
+
+                if win_check(board, mark) == True:
+                    game_on = False
+                else:
+                    player1_turn = False
+
+        if full_board_check(board) == True:
+            print("\nLooks like a tie... nicely done. ")
 
     if not replay():
         break
-# break
