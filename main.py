@@ -8,8 +8,6 @@ import random
 
 def display_board(board):
 
-    #print("*** func: display_board(board) *** ")
-
     print("\n " + board[7] + "  |  " + board[8] + "  |  " + board[9] + " ")
     print("-" * 15)
     print(" " + board[4] + "  |  " + board[5] + "  |  " + board[6] + " ")
@@ -17,8 +15,6 @@ def display_board(board):
     print(" " + board[1] + "  |  " + board[2] + "  |  " + board[3] + " ")
 
 def player_input():
-
-    #print("*** func: player_input() *** ")
 
     input_correct = None
     player1 = ''
@@ -39,16 +35,12 @@ def player_input():
 
 def place_marker(board, marker, position):
 
-    #print("*** func: place_marker(board, marker, position) *** ")
-
     if position < 1 or position > 9:
         print("\nERROR: Please position in 1-9. ")
     else:
         board[position] = marker
 
 def win_check(board, mark):
-
-    #print("*** func: win_check(board, mark) *** ")
 
     gameover = False
 
@@ -107,20 +99,18 @@ def win_check(board, mark):
     return gameover
 
 def choose_first():
-    #print("*** func: choose_first() *** ")
+
     return (random.randrange(1,100))%2 == 0
 
 def space_check(board, position):
-    #print("*** func: space_check(board, position) *** ")
+
     return board[position] == ' '
 
 def full_board_check(board):
-    #print("*** func: full_board_check(board) *** ")
+
     return not ' ' in board
 
 def player_choice(board):
-
-    #print("*** func: player_choice(board) *** ")
 
     input_correct = None
 
@@ -134,8 +124,6 @@ def player_choice(board):
             return space_check(board, next_position)
 
 def replay():
-
-    #print("*** func: replay() *** ")
 
     new_game = None
 
