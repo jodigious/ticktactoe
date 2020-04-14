@@ -4,8 +4,6 @@
 
 import random
 
-
-
 def display_board(board):
 
     print("\n " + board[7] + "  |  " + board[8] + "  |  " + board[9] + " ")
@@ -126,7 +124,6 @@ def player_choice(board):
 def replay():
 
     new_game = None
-
     redo = None
 
     while redo != True:
@@ -156,7 +153,6 @@ if player1_mark.upper() == "X":
     player2_mark = 'O'
 else:
     player2_mark = 'X'
-
 
 while True:
 
